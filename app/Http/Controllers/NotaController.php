@@ -17,11 +17,14 @@ class NotaController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $idAlunoSerie
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($dados)
+    public function index($idAlunoSerie, $anoExercicio)
     {
-        return view('horario.index', [
+        $dados = Nota::where('alunoserie_id' == $idAlunoSerie && 'exercicio' == $anoExercicio);
+
+        return view('nota.index', [
             'dados' => $dados,
         ]);
     }
@@ -33,7 +36,7 @@ class NotaController extends Controller
      */
     public function create()
     {
-        return view('horario.create');
+        return view('nota.create');
     }
 
     /**
@@ -50,9 +53,9 @@ class NotaController extends Controller
             'exercicio' => 'required',
         ]);
 
-        Horario::create($dado);
+        Nota::create($dado);
 
-        return redirect()->route('horario.index');
+        return redirect()->route('nota.index');
     }
 
     /**
@@ -63,9 +66,9 @@ class NotaController extends Controller
      */
     public function show($id)
     {
-        $dado = Horario::find($id);
+        $dado = Nota::find($id);
 
-        return view('horario.show', [
+        return view('nota.show', [
             'dado' => $dado,
         ]);
     }
@@ -78,9 +81,9 @@ class NotaController extends Controller
      */
     public function edit($id)
     {
-        $dado = Horario::find($id);
+        $dado = Nota::find($id);
 
-        return view('horario.edit',[
+        return view('nota.edit',[
             'dado' => $dado,
         ]);
     }
@@ -94,7 +97,7 @@ class NotaController extends Controller
      */
     public function update($id)
     {
-        $dado = Horario::find($id);
+        $dado = Nota::find($id);
 
         $dado = $this->request->validate([
             'user_id' => 'required',
@@ -104,7 +107,7 @@ class NotaController extends Controller
 
         if ($task->update($dado))
         {
-            return redirect()->route('horario.index');
+            return redirect()->route('nota.index');
         }
         else{
             return 'false';
@@ -119,11 +122,11 @@ class NotaController extends Controller
      */
     public function destroy($id)
     {
-        $dado = Horario::find($id);
+        $dado = Nota::find($id);
 
         if ($dado->delete())
         {
-            return response()->json(['success'=>true,'url'=> route('horario.index')]);
+            return response()->json(['success'=>true,'url'=> route('nota.index')]);
         }
         else{
             return 'false';

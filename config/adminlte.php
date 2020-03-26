@@ -173,38 +173,138 @@ return [
     */
 
     'menu' => [
-
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        ['header' => 'EXIBIÇÃO NA LISTA'],
-        [
-            'text'       => 'Agendadas',
-            'icon_color' => 'yellow',
-            'route'      => 'tasks.agendadas',
-        ],
-        [
-            'text'       => 'Vencidas',
-            'icon_color' => 'yellow',
-            'route'      => 'tasks.vencidas',
-        ],
-        [
-            'text'       => 'Todas',
-            'icon_color' => 'yellow',
-            'route'      => 'tasks.index',
-        ],
-        ['header' => 'DADOS DO USUÁRIO'],
-        [
-            'text' => 'Perfil',
-            'url'  => 'emConstrucao',
-            'icon' => 'fas fa-fw fa-user',
+            'text'    => 'Aluno',
+            'icon'    => 'fas fa-fw fa-user-graduate',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'route'  => 'alunos.usershow',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text'  => 'Nota Atuais',
+                    'route' => 'alunos.index',
+                    'icon'  => 'fas fa-fw fa-table',
+                ],
+                [
+                    'text'  => 'Anos Anteriores',
+                    'icon'  => 'fas fa-fw fa-table',
+                    'route' => 'alunos.index',
+                ],
+            ],
         ],
         [
-            'text' => 'Alterar Senha',
-            'url'  => 'emConstrucao',
-            'icon' => 'fas fa-fw fa-lock',
+            'text'    => 'Professor',
+            'icon'    => 'fas fa-fw fa-user-tie',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'url'  => 'emConstrucao',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text'  => 'Salas Cadastradas',
+                    'route' => 'alunos.index',
+                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
+                ],
+                [
+                    'text'  => 'Horários de Aula',
+                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
+                    'route' => 'alunos.index',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Gestor',
+            'icon'    => 'fas fa-fw fa-user-cog',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'url'  => 'emConstrucao',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text'  => 'Alunos',
+                    'icon'  => 'fas fa-fw fa-user',
+                    'submenu' => [
+                        [
+                            'text' => 'Cadastrar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-share-square',
+                        ],
+                        [
+                            'text' => 'Listar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-list',
+                        ],
+                    ],
+                ],
+                [
+                    'text'  => 'Professores',
+                    'icon'  => 'fas fa-fw fa-user',
+                    'submenu' => [
+                        [
+                            'text' => 'Cadastrar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-share-square',
+                        ],
+                        [
+                            'text' => 'Listar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-list',
+                        ],
+                    ],
+                ],
+                [
+                    'text'  => 'Salas',
+                    'icon'  => 'fas fa-fw fa-school',
+                    'submenu' => [
+                        [
+                            'text' => 'Cadastrar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-share-square',
+                        ],
+                        [
+                            'text' => 'Listar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-list',
+                        ],
+                    ],
+                ],
+                [
+                    'text'  => 'Quadro de Horários',
+                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
+                    'submenu' => [
+                        [
+                            'text' => 'Cadastrar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-share-square',
+                        ],
+                        [
+                            'text' => 'Listar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-list',
+                        ],
+                    ],
+                ],
+                [
+                    'text'  => 'Notas',
+                    'icon'  => 'fas fa-fw fa-table',
+                    'submenu' => [
+                        [
+                            'text' => 'Cadastrar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-share-square',
+                        ],
+                        [
+                            'text' => 'Listar',
+                            'url'  => '#',
+                            'icon'  => 'fas fa-fw fa-list',
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
 

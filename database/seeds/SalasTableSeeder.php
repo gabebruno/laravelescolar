@@ -16,15 +16,7 @@ class SalasTableSeeder extends Seeder
             'ensino' => 'Fundamental 1'
         ]);
         DB::table('salas')->insert([
-            'descricao' => '1ª Ano B',
-            'ensino' => 'Fundamental 1'
-        ]);
-        DB::table('salas')->insert([
             'descricao' => '2º Ano A',
-            'ensino' => 'Fundamental 1'
-        ]);
-        DB::table('salas')->insert([
-            'descricao' => '2ª Ano B',
             'ensino' => 'Fundamental 1'
         ]);
         DB::table('salas')->insert([
@@ -32,15 +24,7 @@ class SalasTableSeeder extends Seeder
             'ensino' => 'Fundamental 1'
         ]);
         DB::table('salas')->insert([
-            'descricao' => '3ª Ano B',
-            'ensino' => 'Fundamental 1'
-        ]);
-        DB::table('salas')->insert([
             'descricao' => '4ª Ano A',
-            'ensino' => 'Fundamental 1'
-        ]);
-        DB::table('salas')->insert([
-            'descricao' => '4ª Ano B',
             'ensino' => 'Fundamental 1'
         ]);
         DB::table('salas')->insert([
@@ -48,15 +32,7 @@ class SalasTableSeeder extends Seeder
             'ensino' => 'Fundamental 2'
         ]);
         DB::table('salas')->insert([
-            'descricao' => '5ª Ano B',
-            'ensino' => 'Fundamental 2'
-        ]);
-        DB::table('salas')->insert([
             'descricao' => '6ª Ano A',
-            'ensino' => 'Fundamental 2'
-        ]);
-        DB::table('salas')->insert([
-            'descricao' => '6ª Ano B',
             'ensino' => 'Fundamental 2'
         ]);
         DB::table('salas')->insert([
@@ -64,23 +40,11 @@ class SalasTableSeeder extends Seeder
             'ensino' => 'Fundamental 2'
         ]);
         DB::table('salas')->insert([
-            'descricao' => '7ª Ano B',
-            'ensino' => 'Fundamental 2'
-        ]);
-        DB::table('salas')->insert([
             'descricao' => '8ª Ano A',
             'ensino' => 'Fundamental 2'
         ]);
         DB::table('salas')->insert([
-            'descricao' => '8ª Ano B',
-            'ensino' => 'Fundamental 2'
-        ]);
-        DB::table('salas')->insert([
             'descricao' => '9ª Ano A',
-            'ensino' => 'Fundamental 2'
-        ]);
-        DB::table('salas')->insert([
-            'descricao' => '9ª Ano B',
             'ensino' => 'Fundamental 2'
         ]);
     }

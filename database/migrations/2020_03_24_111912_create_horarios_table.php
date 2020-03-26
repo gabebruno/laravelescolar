@@ -17,12 +17,12 @@ class CreateHorariosTable extends Migration
             $table->increments('id');
             $table->integer('materia_id')->unsigned();
             $table->integer('sala_id')->unsigned();
-            $table->timestamp('horainicio');
-            $table->timestamp('horafim');
+            $table->year('exercicio');
+            $table->time('horainicio');
+            $table->time('horafim');
 
             $table->foreign('materia_id')->references('id')->on('materias');
             $table->foreign('sala_id')->references('id')->on('salas');
-
         });
     }
 

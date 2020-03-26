@@ -3,13 +3,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\MateriaController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SalaController;
-use App\Http\Controllers\HorarioController;
-
 
 class ProfessorController
 {
+    public function usershow($id)
+    {
+        UserController::show($id);
+    }
 
+    public function horarioshow($id)
+    {
+        HorarioController::show($id);
+    }
+
+    public function notashow($id)
+    {
+        NotaController::show($id);
+    }
 }

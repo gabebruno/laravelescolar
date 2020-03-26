@@ -10,13 +10,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', function() {
-    //$tasks = Task::paginate(10);
-    return view('tasks/index', ['tasks' => $tasks]);
+    return view('index');
+
 })->name('home')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('tasks', 'TaskController');
-    Route::get('agendadas', 'TaskController@agendadas')->name('tasks.agendadas');
-    Route::get('vencidas', 'TaskController@vencidas')->name('tasks.vencidas');
-    Route::get('emConstrucao', 'TaskController@emConstrucao')->name('emConstrucao');
+
+    Route::get('usershow', 'AlunoController@usershow')->name('alunos.usershow');
+    Route::get('index', 'AlunoController@index')->name('alunos.index');
+
 });
+
