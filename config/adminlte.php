@@ -174,23 +174,24 @@ return [
 
     'menu' => [
         [
+            'text' => 'Perfil',
+            'icon' => 'fas fa-fw fa-user',
+            'route' => 'user.dados'
+        ],
+        [
             'text'    => 'Aluno',
             'icon'    => 'fas fa-fw fa-user-graduate',
             'submenu' => [
-                [
-                    'text' => 'Perfil',
-                    'route'  => 'alunos.usershow',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
+
                 [
                     'text'  => 'Nota Atuais',
-                    'route' => 'alunos.index',
                     'icon'  => 'fas fa-fw fa-table',
+
                 ],
                 [
                     'text'  => 'Anos Anteriores',
                     'icon'  => 'fas fa-fw fa-table',
-                    'route' => 'alunos.index',
+
                 ],
             ],
         ],
@@ -199,19 +200,12 @@ return [
             'icon'    => 'fas fa-fw fa-user-tie',
             'submenu' => [
                 [
-                    'text' => 'Perfil',
-                    'url'  => 'emConstrucao',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
-                [
                     'text'  => 'Salas Cadastradas',
-                    'route' => 'alunos.index',
                     'icon'  => 'fas fa-fw fa-chalkboard-teacher',
                 ],
                 [
                     'text'  => 'Horários de Aula',
                     'icon'  => 'fas fa-fw fa-chalkboard-teacher',
-                    'route' => 'alunos.index',
                 ],
             ],
         ],
@@ -220,22 +214,15 @@ return [
             'icon'    => 'fas fa-fw fa-user-cog',
             'submenu' => [
                 [
-                    'text' => 'Perfil',
-                    'url'  => 'emConstrucao',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
-                [
                     'text'  => 'Alunos',
                     'icon'  => 'fas fa-fw fa-user',
                     'submenu' => [
                         [
                             'text' => 'Cadastrar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-share-square',
                         ],
                         [
                             'text' => 'Listar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-list',
                         ],
                     ],
@@ -246,12 +233,10 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Cadastrar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-share-square',
                         ],
                         [
                             'text' => 'Listar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-list',
                         ],
                     ],
@@ -262,12 +247,10 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Cadastrar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-share-square',
                         ],
                         [
                             'text' => 'Listar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-list',
                         ],
                     ],
@@ -278,12 +261,10 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Cadastrar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-share-square',
                         ],
                         [
                             'text' => 'Listar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-list',
                         ],
                     ],
@@ -294,12 +275,10 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Cadastrar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-share-square',
                         ],
                         [
                             'text' => 'Listar',
-                            'url'  => '#',
                             'icon'  => 'fas fa-fw fa-list',
                         ],
                     ],

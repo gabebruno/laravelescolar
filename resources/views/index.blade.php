@@ -3,11 +3,18 @@
 @section('frame1')
     <div class="row">
         <div class="col-sm-12">
-            <h3>Logando com gestor aqui exibirá os melhores alunos no ano por série em grafico de colunas</h3>
-            <h3>Logando com professor aqui exibirá os melhores alunos no ano por série que ele da aulas por grafico de colunas</h3>
-            <h3>Logando com aluno aqui exibirá todas as notas do aluno no ano em gráfico de pizza para comparar rendimento por bimestre</h3>
-            <hr>
+            @if ($user->tipo_id == 1)
+                <h3>Bem vindo(a) aluno(a) {{$user->nome}}</h3>
+                <h5>Favor acessar os menus de aluno ao lado!</h5>
+            @endif
+            @if ($user->tipo_id == 2)
+                <h3>Bem vindo(a) Professor(a) {{$user->nome}}</h3>
+                <h5>Favor acessar os menus de professor ao lado!</h5>
+            @endif
+            @if ($user->tipo_id == 3)
+                <h3>Bem vindo {{$user->nome}}</h3>
+                <h5>Favor acessar os menus de gestão ao lado!</h5>
+            @endif
         </div>
-</div>
-
+    </div>
 @stop

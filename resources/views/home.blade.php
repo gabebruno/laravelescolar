@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content_header')
-    <h1 class="m-0 text-dark" align="center">Gerenciamento Escolar em Laravel</h1>
+    <h1 class="m-0 text-dark" align="center">Gerenciamento Escolar</h1>
 @stop
 
 @section('content')

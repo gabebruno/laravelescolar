@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AlunoSerie;
+use App\Models\SalaUser;
 use Carbon\Carbon;
 
-class AlunoSerieController extends Controller
+class SalaUserController extends Controller
 {
     protected $request;
 
@@ -51,7 +51,7 @@ class AlunoSerieController extends Controller
             'exercicio' => 'required',
         ]);
 
-        AlunoSerie::create($dado);
+        SalaUser::create($dado);
 
         return redirect()->route('alunoseries.index');
     }
@@ -64,7 +64,7 @@ class AlunoSerieController extends Controller
      */
     public function show($id)
     {
-        $dado = AlunoSerie::find($id);
+        $dado = SalaUser::find($id);
 
         return view('alunoseries.show', [
             'dado' => $dado,
@@ -79,7 +79,7 @@ class AlunoSerieController extends Controller
      */
     public function edit($id)
     {
-        $dado = AlunoSerie::find($id);
+        $dado = SalaUser::find($id);
 
         return view('alunoseries.edit',[
             'dado' => $dado,
@@ -95,7 +95,7 @@ class AlunoSerieController extends Controller
      */
     public function update($id)
     {
-        $dado = AlunoSerie::find($id);
+        $dado = SalaUser::find($id);
 
         $dado = $this->request->validate([
             'user_id' => 'required',
@@ -120,7 +120,7 @@ class AlunoSerieController extends Controller
      */
     public function destroy($id)
     {
-        $dado = AlunoSerie::find($id);
+        $dado = SalaUser::find($id);
 
         if ($dado->delete())
         {

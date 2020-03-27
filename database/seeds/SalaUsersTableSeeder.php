@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AlunosSeriesTableSeeder extends Seeder
+class SalaUsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,34 +11,34 @@ class AlunosSeriesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 2,
-            'sala_id' => 24,
+            'sala_id' => 3,
             'exercicio' => 2019
         ]);
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 3,
-            'sala_id' => 25,
+            'sala_id' => 4,
             'exercicio' => 2019
         ]);
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 4,
-            'sala_id' => 26,
+            'sala_id' => 5,
             'exercicio' => 2019
         ]);
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 2,
-            'sala_id' => 25,
+            'sala_id' => 4,
             'exercicio' => 2020
         ]);
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 3,
-            'sala_id' => 26,
+            'sala_id' => 5,
             'exercicio' => 2020
         ]);
-        DB::table('alunos_series')->insert([
+        DB::table('sala_users')->insert([
             'user_id' => 4,
-            'sala_id' => 27,
+            'sala_id' => 6,
             'exercicio' => 2020
         ]);
     }

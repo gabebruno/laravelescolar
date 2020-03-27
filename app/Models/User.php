@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,8 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'tipo_id'
+        'name', 'cpf', 'email', 'telefone', 'endereco', 'password', 'tipo_id'
     ];
+
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,4 +37,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function salauser()
+    {
+        return $this->hasMany(SalaUser::class);
+    }
+
+    public function salas()
+    {
+        return $this->belongsToMany(Sala::class, 'sala_users');
+    }
+
+    public function materia()
+    {
+        return $this->hasMany(Materia::class);
+    }
+
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -19,11 +21,37 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($dados)
+    public function index()
     {
-        return view('users.index', [
-            'dados' => $dados,
-        ]);
+        $id = Auth::id();
+
+        $dados = User::where('id', '=', $id)->with('salas')->first();
+
+        $dados->cpf = $this->cpf($dados->cpf);
+        $dados->telefone = $this->telefone($dados->telefone);
+
+        switch ($dados->tipo_id) {
+
+            case 1:
+                return view('alunos.dados', [
+                    'dados' => $dados,
+                    'anoAtual' => Carbon::now()->year,
+                ]);
+                break;
+            case 2:
+                return view('professores.dados', [
+                    'dados' => $dados,
+                    'anoAtual' => Carbon::now()->year,
+                ]);
+                break;
+            case 3:
+                return view('gestores.dados', [
+                    'dados' => $dados,
+                    'anoAtual' => Carbon::now()->year,
+                ]);
+                break;
+
+        }
     }
 
     /**
@@ -58,9 +86,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $dados = User::find($id);
-
-        return $dados;
+       //
     }
 
     /**
@@ -87,12 +113,17 @@ class UserController extends Controller
      */
     public function update($id, $obj)
     {
-        $dado = User::find($id);
+        $dados = User::find($id);
 
-        if ($dado->update($obj))
+        $obj = $this->request->validate([
+            'user_id' => 'required',
+            'sala_id' => 'required',
+            'exercicio' => 'required',
+        ]);
+
+        if ($dados->update($obj))
         {
-            //return redirect()->route('users.index');
-            return 'true';
+            return redirect()->route('horario.index');
         }
         else{
             return 'false';
@@ -117,5 +148,33 @@ class UserController extends Controller
         else{
             return 'false';
         }
+    }
+
+    function cpf($cpf) {
+
+        if (! $cpf) {
+            return '';
+        }
+        if (strlen($cpf) == 11) {
+            return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9);
+        }
+        return $cpf;
+
+    }
+
+    function telefone($telefone) {
+
+        if (! $telefone) {
+            return '';
+        }
+        if (strlen($telefone) == 9) {
+            return substr($telefone, 0, 5) . '-' . substr($telefone, 3, 4);
+        }
+        else if (strlen($telefone) == 11)
+        {
+            return '(' . substr($telefone, 0, 2) . ') ' . substr($telefone, 2, 5) . '-' . substr($telefone, 7, 4);
+        }
+        return $telefone;
+
     }
 }
