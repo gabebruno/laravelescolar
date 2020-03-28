@@ -169,7 +169,7 @@ class UserController extends Controller
 
     public function listaProfessores()
     {
-            $dados = User::with('tipousuario',  'materia')->where('tipo_id', '=', 2)->get();
+            $dados = User::where('tipo_id', '=', 2)->get();
 
             return $dados;
     }

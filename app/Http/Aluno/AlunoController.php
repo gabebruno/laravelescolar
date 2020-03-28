@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Aluno;
+namespace App\Http\Aluno;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NotaController;

@@ -22,12 +22,9 @@ class GestorController extends Controller
 
     public function index()
     {
-        $alunos = $this->userService->listaAlunos();
-        $professores = $this->userService->listaProfessores();
-        $salas = $this->salaService->index();
-
-        $this->trataAlunos($alunos);
-        $this->trataProfessores($alunos);
+        $salas = $this->trataSalas($this->salaService->index());
+        $professores = $this->trataProfessores($this->userService->listaProfessores());
+        $alunos = $this->trataAlunos($this->userService->listaAlunos());
 
         return view('gestores.dados', [
             'alunos' => $alunos,
@@ -36,14 +33,32 @@ class GestorController extends Controller
         ]);
     }
 
+
+    public function trataProfessores($dados)
+    {
+
+        foreach ($dados as $dado) {
+            $professores[$dado->id] = [
+                'nome' => $dado->nome,
+                'email' => $dado->email,
+                'cpf' => $this->userService->cpf($dado->cpf),
+                'telefone' => $this->userService->telefone($dado->telefone),
+                'endereco' => $dado->endereco,
+                'materias' => $dado->materia,
+            ];
+        }
+
+        return $professores;
+    }
+
     public function trataAlunos($dados)
     {
         foreach ($dados as $dado) {
             $alunos[$dado->id] = [
                 'nome' => $dado->nome,
                 'email' => $dado->email,
-                'cpf' => $dado->cpf,
-                'telefone' => $dado->telefone,
+                'cpf' => $this->userService->cpf($dado->cpf),
+                'telefone' => $this->userService->telefone($dado->telefone),
                 'endereco' => $dado->endereco,
                 'salas' => $dado->salas->last()->descricao,
                 'ensino' => $dado->salas->last()->ensino,
@@ -53,20 +68,20 @@ class GestorController extends Controller
         return $alunos;
     }
 
-    public function trataProfessores($dados)
+    public function trataSalas($dados)
     {
-
+//        dd($dados);
         foreach ($dados as $dado) {
-            $professores[$dado->id] = [
+            $salas[$dado->id] = [
                 'nome' => $dado->nome,
                 'email' => $dado->email,
-                'cpf' => $dado->cpf,
-                'telefone' => $dado->telefone,
+                'cpf' => $this->userService->cpf($dado->cpf),
+                'telefone' => $this->userService->telefone($dado->telefone),
                 'endereco' => $dado->endereco,
-                'materias' => $dado->materia,
+                'sala' => $dado['sala'],
             ];
         }
 
-        return $professores;
+        return $salas;
     }
 }

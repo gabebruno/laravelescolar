@@ -7,28 +7,32 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Disciplina</th>
-                <th>1º Bimestre</th>
-                <th>2º Bimestre</th>
-                <th>3º Bimestre</th>
-                <th>4º Bimestre</th>
-                <th>Média Anual</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Materias</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($professores as $dado)
                 <tr>
+                    <td>{{$dado['nome']}}</td>
+                    <td>{{$dado['email']}}</td>
+                    <td>{{$dado['cpf']}}</td>
+                    <td>{{$dado['telefone']}}</td>
+                    <td>{{$dado['endereco']}}</td>
+                    <td>
+                        @foreach($dado['materias'] as $key => $materia)
+                            {{$materia['descricao']}}
+                            @if (count($dado['materias']) != $key+1)
+                                <hr>
+                            @endif
+                        @endforeach
+                    </td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    @if(6 > 6)
-                        <td><a class="badge bg-blue"></a></td>
-                    @else
-                        <td><a class="badge bg-red"></a></td>
-                    @endif
-
                 </tr>
             @endforeach
             </tbody>

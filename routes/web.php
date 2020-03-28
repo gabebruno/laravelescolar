@@ -22,24 +22,21 @@ Route::middleware('auth')->group(function () {
     Route::get('professor', 'UserController@dadosPessoais')->name('professores.dados');
     Route::get('professor/{id}/horario', 'HorarioController@show')->name('professores.horario');
 
-    Route::get('gestor', 'Gestor\GestorController@index')->name('gestores.dados');
 });
 
-//Route::middleware('auth')->namespace('Aluno')->group(function () {
+Route::middleware('auth')->namespace('Gestor')->group(function () {
 
-//    Route::get('user', 'AlunoController@dadosAluno')->name('user.dados');
+    Route::get('gestor', 'GestorController@index')->name('gestores.dados');
 
-//});
+    Route::get('/naoautorizado', function() {
+        return view('auth.naoautorizado');
+    })->name('professores.dados');
 
-//Route::middleware('auth')->namespace('Professor')->group(function () {
+    Route::get('/naoautorizado', function() {
+        return view('auth.naoautorizado');
+    })->name('alunos.dados');
 
-//    Route::get('user', 'UserController@index')->name('user.dados');
+});
 
-//});
 
-//Route::middleware('auth')->namespace('Gestor')->group(function () {
-
-//    Route::get('user', 'UserController@index')->name('user.dados');
-
-//});
 

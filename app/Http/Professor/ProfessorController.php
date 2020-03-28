@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Professor;
+namespace App\Http\Professor;
 
 use App\Http\Controllers\Controller as Controller;
 use App\Http\Controllers\SalaUserController;

@@ -17,20 +17,13 @@ class SalaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
         $dados = Sala::with('horario', 'alunos')->get();
 
-        foreach ($dados as $dado) {
-            $salas[$dado->id] = [
-                'descricao' => $dado->descricao,
-                'ensino' => $dado->ensino,
-                'alunos' => $dado->users,
-                'professores' => $dado->salas,
-            ];
-        }
+        return $dados;
     }
 
     /**
@@ -57,7 +50,7 @@ class SalaController extends Controller
             'exercicio' => 'required',
         ]);
 
-        Horario::create($dado);
+        Sala::create($dado);
 
         return redirect()->route('horario.index');
     }
@@ -95,7 +88,7 @@ class SalaController extends Controller
      */
     public function update($id)
     {
-        $dado = Horario::find($id);
+        $dado = Sala::find($id);
 
         $dado = $this->request->validate([
             'user_id' => 'required',

@@ -27,10 +27,12 @@
                 <tr>
                     <th>Disciplinas:</th>
                     <td>
-                        @foreach ($dados->materia()->get()->all() as $materia)
+                        @foreach ($dados->materia()->get()->all() as $key => $materia)
                             @if ($materia->user_id == $dados->id)
                                 {{$materia->descricao}}
-                                <hr>
+                                @if ($key != $dados->materia()->count()-1)
+                                    <hr>
+                                @endif
                             @endif
                         @endforeach
                     </td>
