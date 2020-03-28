@@ -17,9 +17,9 @@ class Sala extends Model
         return $this->belongsTo(SalaUser::class);
     }
 
-    public function users()
+    public function alunos()
     {
-        return $this->belongsTo(Horario::class);
+        return $this->belongsToMany(User::class, 'sala_users', 'id', 'user_id');
     }
 
     public function horario()

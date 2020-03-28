@@ -174,116 +174,19 @@ return [
 
     'menu' => [
         [
-            'text' => 'Perfil',
-            'icon' => 'fas fa-fw fa-user',
-            'route' => 'user.dados'
-        ],
-        [
             'text'    => 'Aluno',
             'icon'    => 'fas fa-fw fa-user-graduate',
-            'submenu' => [
-
-                [
-                    'text'  => 'Nota Atuais',
-                    'icon'  => 'fas fa-fw fa-table',
-
-                ],
-                [
-                    'text'  => 'Anos Anteriores',
-                    'icon'  => 'fas fa-fw fa-table',
-
-                ],
-            ],
+            'route'   => 'alunos.dados'
         ],
         [
             'text'    => 'Professor',
             'icon'    => 'fas fa-fw fa-user-tie',
-            'submenu' => [
-                [
-                    'text'  => 'Salas Cadastradas',
-                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
-                ],
-                [
-                    'text'  => 'Horários de Aula',
-                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
-                ],
-            ],
+            'route'   => 'professores.dados'
         ],
         [
             'text'    => 'Gestor',
             'icon'    => 'fas fa-fw fa-user-cog',
-            'submenu' => [
-                [
-                    'text'  => 'Alunos',
-                    'icon'  => 'fas fa-fw fa-user',
-                    'submenu' => [
-                        [
-                            'text' => 'Cadastrar',
-                            'icon'  => 'fas fa-fw fa-share-square',
-                        ],
-                        [
-                            'text' => 'Listar',
-                            'icon'  => 'fas fa-fw fa-list',
-                        ],
-                    ],
-                ],
-                [
-                    'text'  => 'Professores',
-                    'icon'  => 'fas fa-fw fa-user',
-                    'submenu' => [
-                        [
-                            'text' => 'Cadastrar',
-                            'icon'  => 'fas fa-fw fa-share-square',
-                        ],
-                        [
-                            'text' => 'Listar',
-                            'icon'  => 'fas fa-fw fa-list',
-                        ],
-                    ],
-                ],
-                [
-                    'text'  => 'Salas',
-                    'icon'  => 'fas fa-fw fa-school',
-                    'submenu' => [
-                        [
-                            'text' => 'Cadastrar',
-                            'icon'  => 'fas fa-fw fa-share-square',
-                        ],
-                        [
-                            'text' => 'Listar',
-                            'icon'  => 'fas fa-fw fa-list',
-                        ],
-                    ],
-                ],
-                [
-                    'text'  => 'Quadro de Horários',
-                    'icon'  => 'fas fa-fw fa-chalkboard-teacher',
-                    'submenu' => [
-                        [
-                            'text' => 'Cadastrar',
-                            'icon'  => 'fas fa-fw fa-share-square',
-                        ],
-                        [
-                            'text' => 'Listar',
-                            'icon'  => 'fas fa-fw fa-list',
-                        ],
-                    ],
-                ],
-                [
-                    'text'  => 'Notas',
-                    'icon'  => 'fas fa-fw fa-table',
-                    'submenu' => [
-                        [
-                            'text' => 'Cadastrar',
-                            'icon'  => 'fas fa-fw fa-share-square',
-                        ],
-                        [
-                            'text' => 'Listar',
-                            'icon'  => 'fas fa-fw fa-list',
-                        ],
-                    ],
-                ],
-            ],
+            'route'   => 'gestores.dados'
         ],
     ],
 

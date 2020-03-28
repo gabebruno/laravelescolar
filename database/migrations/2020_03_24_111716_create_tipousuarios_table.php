@@ -13,7 +13,7 @@ class CreateTipoUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipousuarios', function (Blueprint $table) {
+        Schema::create('tipo_usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao');
         });
@@ -26,6 +26,6 @@ class CreateTipoUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipousuarios');
+        Schema::dropIfExists('tipo_usuarios');
     }
 }

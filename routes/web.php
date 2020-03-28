@@ -16,12 +16,13 @@ Route::get('/home', function() {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('user', 'UserController@index')->name('user.dados');
-    Route::get('aluno/{id}/notas/{ano?}', 'NotaController@index')->name('alunos.notas');
-    Route::get('aluno/{id}/horario', 'HorarioController@index')->name('alunos.horario');
+    Route::get('aluno', 'UserController@dadosPessoais')->name('alunos.dados');
+    Route::get('aluno/{id}/notas', 'NotaController@show')->name('alunos.notas');
 
-    Route::get('professor/{id}/horario', 'HorarioController@index')->name('professor.horario');
+    Route::get('professor', 'UserController@dadosPessoais')->name('professores.dados');
+    Route::get('professor/{id}/horario', 'HorarioController@show')->name('professores.horario');
 
+    Route::get('gestor', 'Gestor\GestorController@index')->name('gestores.dados');
 });
 
 //Route::middleware('auth')->namespace('Aluno')->group(function () {

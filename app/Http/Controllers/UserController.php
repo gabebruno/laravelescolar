@@ -23,10 +23,19 @@ class UserController extends Controller
      */
     public function index()
     {
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dadosPessoais()
+    {
         $id = Auth::id();
 
-        $dados = User::where('id', '=', $id)->with('salas')->first();
-
+        $dados = User::where('id', '=', $id)->first();
         $dados->cpf = $this->cpf($dados->cpf);
         $dados->telefone = $this->telefone($dados->telefone);
 
@@ -40,12 +49,6 @@ class UserController extends Controller
                 break;
             case 2:
                 return view('professores.dados', [
-                    'dados' => $dados,
-                    'anoAtual' => Carbon::now()->year,
-                ]);
-                break;
-            case 3:
-                return view('gestores.dados', [
                     'dados' => $dados,
                     'anoAtual' => Carbon::now()->year,
                 ]);
@@ -84,9 +87,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show()
     {
-       //
+
     }
 
     /**
@@ -130,26 +133,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return string
-     */
-    public function destroy($id)
-    {
-        $dado = User::find($id);
-
-        if ($dado->delete())
-        {
-            //return response()->json(['success'=>true,'url'=> route('users.index')]);
-            return 'true';
-        }
-        else{
-            return 'false';
-        }
-    }
-
     function cpf($cpf) {
 
         if (! $cpf) {
@@ -175,6 +158,19 @@ class UserController extends Controller
             return '(' . substr($telefone, 0, 2) . ') ' . substr($telefone, 2, 5) . '-' . substr($telefone, 7, 4);
         }
         return $telefone;
+    }
 
+    public function listaAlunos()
+    {
+            $dados = User::with('tipousuario', 'salauser', 'salas')->where('tipo_id', '=', 1)->get();
+
+            return $dados;
+    }
+
+    public function listaProfessores()
+    {
+            $dados = User::with('tipousuario',  'materia')->where('tipo_id', '=', 2)->get();
+
+            return $dados;
     }
 }

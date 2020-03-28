@@ -39,8 +39,7 @@
             <tr>
                 <th>Ações:</th>
                 <td>
-                    <a href="{{ route('alunos.notas', [$dados->salauser()->get()->last()->id, Carbon\Carbon::now()->year]) }}" class="btn btn-sm btn-primary col-sm-2">Ver Notas</a>
-                    <a href="{{ route('alunos.horario', $dados->id) }}" class="btn btn-sm btn-info col-sm-2">Ver Horario</a>
+                    <a href="{{ route('alunos.notas', $dados->salauser()->get()->last()->id) }}" class="btn btn-sm btn-primary col-sm-2">Ver Notas</a>
                 </td>
             </tr>
             </tbody>

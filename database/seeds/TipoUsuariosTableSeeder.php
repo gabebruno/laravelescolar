@@ -11,13 +11,13 @@ class TipoUsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tipousuarios')->insert([
+        DB::table('tipo_usuarios')->insert([
             'descricao' => 'Aluno'
         ]);
-        DB::table('tipousuarios')->insert([
+        DB::table('tipo_usuarios')->insert([
             'descricao' => 'Professor'
         ]);
-        DB::table('tipousuarios')->insert([
+        DB::table('tipo_usuarios')->insert([
             'descricao' => 'Gestor'
         ]);
     }

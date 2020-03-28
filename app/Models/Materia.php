@@ -17,4 +17,19 @@ class Materia extends Model
         return $this->hasMany(Nota::class);
     }
 
+    public function horario()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
+    public function sala()
+    {
+        return $this->belongsToMany(Sala::class, 'horarios');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -38,7 +38,7 @@
                 <tr>
                     <th>Ações:</th>
                     <td>
-                        <a href="{{ route('professor.horario', $dados->id) }}" class="btn btn-sm btn-info col-sm-2">Ver Horarios</a>
+                        <a href="{{ route('professores.horario', $dados->id) }}" class="btn btn-sm btn-info col-sm-2">Ver Horarios</a>
                     </td>
                 </tr>
             </tbody>

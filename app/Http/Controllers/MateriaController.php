@@ -19,11 +19,21 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($dados)
+    public function index()
     {
-        return view('horario.index', [
-            'dados' => $dados,
-        ]);
+        $dados = Materia::with('sala', 'user', 'horario')->get();
+
+        foreach ($dados as $dado) {
+            $materias[$dado->id] = [
+                'descricao' => $dado->descricao,
+                'professor' => $dado->user->nome,
+                'salas' => $dado->sala,
+                'horarios' => $dado->horario,
+
+            ];
+        }
+
+        return $materias;
     }
 
     /**
@@ -33,7 +43,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        return view('horario.create');
+
     }
 
     /**
@@ -50,9 +60,9 @@ class MateriaController extends Controller
             'exercicio' => 'required',
         ]);
 
-        Horario::create($dado);
+        Materia::create($dado);
 
-        return redirect()->route('horario.index');
+        return 'true';
     }
 
     /**
@@ -63,11 +73,7 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
-        $dado = Horario::find($id);
 
-        return view('horario.show', [
-            'dado' => $dado,
-        ]);
     }
 
     /**
@@ -78,11 +84,6 @@ class MateriaController extends Controller
      */
     public function edit($id)
     {
-        $dado = Horario::find($id);
-
-        return view('horario.edit',[
-            'dado' => $dado,
-        ]);
     }
 
     /**
@@ -94,7 +95,7 @@ class MateriaController extends Controller
      */
     public function update($id)
     {
-        $dado = Horario::find($id);
+        $dado = Materia::find($id);
 
         $dado = $this->request->validate([
             'user_id' => 'required',
@@ -105,25 +106,6 @@ class MateriaController extends Controller
         if ($task->update($dado))
         {
             return redirect()->route('horario.index');
-        }
-        else{
-            return 'false';
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return string
-     */
-    public function destroy($id)
-    {
-        $dado = Horario::find($id);
-
-        if ($dado->delete())
-        {
-            return response()->json(['success'=>true,'url'=> route('horario.index')]);
         }
         else{
             return 'false';

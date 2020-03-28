@@ -16,28 +16,6 @@ class SalaUserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index($dados)
-    {
-        return view('alunoseries.index', [
-            'dados' => $dados,
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('alunoseries.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -54,36 +32,6 @@ class SalaUserController extends Controller
         SalaUser::create($dado);
 
         return redirect()->route('alunoseries.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $dado = SalaUser::find($id);
-
-        return view('alunoseries.show', [
-            'dado' => $dado,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $dado = SalaUser::find($id);
-
-        return view('alunoseries.edit',[
-            'dado' => $dado,
-        ]);
     }
 
     /**

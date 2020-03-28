@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Horario;
+use Illuminate\Support\Facades\Auth;
 
 class HorarioController extends Controller
 {
@@ -63,11 +64,28 @@ class HorarioController extends Controller
      */
     public function show($id)
     {
-        $dado = Horario::find($id);
+        $dados = Horario::with(['sala', 'materia', 'user'])->get();
 
-        return view('horario.show', [
-            'dado' => $dado,
+        $horarios = [];
+
+        foreach ($dados as $key => $dado) {
+            if ($dado->user->id != Auth::id()) {
+                $dado = [];
+            } else {
+                $horarios[$dado->diasemana][$key] = [
+                    'horaInicio' => $dado->horainicio,
+                    'horaFim' => $dado->horafim,
+                    'sala' => $dado->sala->descricao,
+                    'materia' => $dado->materia->descricao
+                ];
+            }
+        }
+
+        return view('professores.horario', [
+            'dados' => $horarios,
+            'id' => Auth::id(),
         ]);
+
     }
 
     /**

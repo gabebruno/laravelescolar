@@ -19,11 +19,18 @@ class SalaController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($dados)
+    public function index()
     {
-        return view('horario.index', [
-            'dados' => $dados,
-        ]);
+        $dados = Sala::with('horario', 'alunos')->get();
+
+        foreach ($dados as $dado) {
+            $salas[$dado->id] = [
+                'descricao' => $dado->descricao,
+                'ensino' => $dado->ensino,
+                'alunos' => $dado->users,
+                'professores' => $dado->salas,
+            ];
+        }
     }
 
     /**
@@ -33,7 +40,7 @@ class SalaController extends Controller
      */
     public function create()
     {
-        return view('horario.create');
+
     }
 
     /**
@@ -63,11 +70,7 @@ class SalaController extends Controller
      */
     public function show($id)
     {
-        $dado = Horario::find($id);
 
-        return view('horario.show', [
-            'dado' => $dado,
-        ]);
     }
 
     /**
@@ -78,11 +81,9 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
-        $dado = Horario::find($id);
+        $dado = Sala::find($id);
 
-        return view('horario.edit',[
-            'dado' => $dado,
-        ]);
+        return 'true';
     }
 
     /**
@@ -111,22 +112,4 @@ class SalaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return string
-     */
-    public function destroy($id)
-    {
-        $dado = Horario::find($id);
-
-        if ($dado->delete())
-        {
-            return response()->json(['success'=>true,'url'=> route('horario.index')]);
-        }
-        else{
-            return 'false';
-        }
-    }
 }

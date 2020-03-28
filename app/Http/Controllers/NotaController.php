@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SalaUser;
 use Illuminate\Http\Request;
 use App\Models\Nota;
+use Illuminate\Support\Facades\Auth;
 
 class NotaController extends Controller
 {
@@ -22,15 +24,7 @@ class NotaController extends Controller
      */
     public function index($salaUserId)
     {
-        $dados = Nota::where('salauser_id', '=', $salaUserId)->get();
-        foreach ($dados as $dado)
-        {
-            $dado->media = ($dado->nota1bi + $dado->nota2bi + $dado->nota3bi + $dado->nota4bi) / 4;
-        }
-
-        return view('alunos.notas', [
-            'dados' => $dados,
-        ]);
+        //
     }
 
     /**
@@ -39,12 +33,17 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id, $exercicio = null)
+    public function show($salaUserId)
     {
-        $dado = Nota::find($id);
+        $dados = Nota::where('salauser_id', '=', $salaUserId)->get();
 
-        return view('nota.show', [
-            'dado' => $dado,
+        foreach ($dados as $dado)
+        {
+            $dado->media = ($dado->nota1bi + $dado->nota2bi + $dado->nota3bi + $dado->nota4bi) / 4;
+        }
+
+        return view('alunos.notas', [
+            'dados' => $dados,
         ]);
     }
 

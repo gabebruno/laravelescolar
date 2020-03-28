@@ -12,5 +12,20 @@ class Horario extends Model
 
     public $timestamps = false;
 
+    public function sala()
+    {
+        return $this->belongsTo(Sala::class, 'sala_id');
+    }
+
+    public function materia()
+    {
+        return $this->belongsTo(Materia::class, 'materia_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 }

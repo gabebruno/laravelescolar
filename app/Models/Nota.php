@@ -21,4 +21,9 @@ class Nota extends Model
     {
         return $this->belongsTo(Materia::class);
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

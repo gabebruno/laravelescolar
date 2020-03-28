@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\TipoUsuarioController;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -52,5 +53,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Materia::class);
     }
+
+    public function tipousuario()
+    {
+        return $this->belongsTo(TipoUsuario::class, 'tipo_id');
+    }
+
 
 }
