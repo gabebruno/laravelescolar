@@ -1,8 +1,7 @@
 
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="col-sm-4">Notas Bimestrais</h3>
-        <hr>
+    <div class="form-group col-sm-12">
+        <a href="{{ route('user.create', 1) }}" class="btn btn-sm btn-info col-sm-2">NOVO ALUNO</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -13,8 +12,7 @@
             <th>Telefone</th>
             <th>Endereço</th>
             <th>Sala</th>
-            <th>Ensino</th>
-            <th>Ações</th>
+            <th class="col-2">Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -26,8 +24,10 @@
                 <td>{{$dado['telefone']}}</td>
                 <td>{{$dado['endereco']}}</td>
                 <td>{{$dado['salas']}}</td>
-                <td>{{$dado['ensino']}}</td>
-                <td></td>
+                <td class="col-sm-2">
+                    <a href="#" onclick="if(confirm('Deseja excluir?')) {deleteUsuario({{$dado['id']}})}" class="btn btn-sm btn-danger">Excluir</a>
+                    <a href="{{ route('user.edit', $dado['id']) }}" class="btn btn-sm btn-warning">Alterar</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

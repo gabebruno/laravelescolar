@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     protected $fillable = [
-        'descricao'
+        'descricao',
+        'ensino'
     ];
 
     public $timestamps = false;
@@ -19,12 +20,12 @@ class Sala extends Model
 
     public function alunos()
     {
-        return $this->belongsToMany(User::class, 'sala_users', 'id', 'user_id');
+        return $this->belongsToMany(User::class, 'sala_users');
     }
 
     public function horario()
     {
-        return $this->hasMany(Horario::class);
+        return $this->hasMany(Horario::class)->with('user');
     }
 
 }

@@ -21,49 +21,27 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $dados = Sala::with('horario', 'alunos')->get();
+        $dados = Sala::all();
 
         return $dados;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return string
      */
     public function store()
     {
         $dado = $this->request->validate([
-            'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
+            'descricao' => 'required',
+            'ensino' => 'required',
         ]);
 
         Sala::create($dado);
 
-        return redirect()->route('horario.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show($id)
-    {
-
+        return 'true';
     }
 
     /**
@@ -76,7 +54,7 @@ class SalaController extends Controller
     {
         $dado = Sala::find($id);
 
-        return 'true';
+        return $dado;
     }
 
     /**
@@ -86,23 +64,27 @@ class SalaController extends Controller
      * @param  int  $id
      * @return string
      */
-    public function update($id)
+    public function update($dado, $id)
     {
-        $dado = Sala::find($id);
+        $dados = Sala::find($id);
 
-        $dado = $this->request->validate([
-            'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
-        ]);
-
-        if ($task->update($dado))
+        if ($dados->update($dado))
         {
-            return redirect()->route('horario.index');
+            return 'true';
         }
-        else{
+        else {
             return 'false';
         }
+    }
+
+    public function destroy($id)
+    {
+        $dados = Sala::find($id);
+
+        if($dado->delete())
+            return 'true';
+        else
+            return 'false';
     }
 
 }

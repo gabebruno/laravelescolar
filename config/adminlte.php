@@ -186,7 +186,7 @@ return [
         [
             'text'    => 'Gestor',
             'icon'    => 'fas fa-fw fa-user-cog',
-            'route'   => 'gestores.dados'
+            'route'   => 'gestores.index'
         ],
     ],
 

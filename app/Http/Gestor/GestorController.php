@@ -26,19 +26,19 @@ class GestorController extends Controller
         $professores = $this->trataProfessores($this->userService->listaProfessores());
         $alunos = $this->trataAlunos($this->userService->listaAlunos());
 
-        return view('gestores.dados', [
+        return view('gestores.index', [
             'alunos' => $alunos,
             'professores' => $professores,
             'salas' => $salas,
         ]);
     }
 
-
     public function trataProfessores($dados)
     {
 
         foreach ($dados as $dado) {
             $professores[$dado->id] = [
+                'id' => $dado->id,
                 'nome' => $dado->nome,
                 'email' => $dado->email,
                 'cpf' => $this->userService->cpf($dado->cpf),
@@ -55,6 +55,7 @@ class GestorController extends Controller
     {
         foreach ($dados as $dado) {
             $alunos[$dado->id] = [
+                'id' => $dado->id,
                 'nome' => $dado->nome,
                 'email' => $dado->email,
                 'cpf' => $this->userService->cpf($dado->cpf),
@@ -70,18 +71,68 @@ class GestorController extends Controller
 
     public function trataSalas($dados)
     {
-//        dd($dados);
-        foreach ($dados as $dado) {
-            $salas[$dado->id] = [
-                'nome' => $dado->nome,
-                'email' => $dado->email,
-                'cpf' => $this->userService->cpf($dado->cpf),
-                'telefone' => $this->userService->telefone($dado->telefone),
-                'endereco' => $dado->endereco,
-                'sala' => $dado['sala'],
-            ];
+
+        foreach ($dados as $key => $dado) {
+                $salas[$dado->id] = [
+                    'id' => $dado->id,
+                    'descricao' => $dado->descricao,
+                    'ensino' => $dado->ensino,
+                ];
         }
 
         return $salas;
     }
+
+    public function editarSala($id)
+    {
+        $dado = $this->salaService->edit($id);
+        return view('gestores.editasala', ['dado' => $dado]);
+
+    }
+
+    public function updateSala($id)
+    {
+        $dado = $this->request->validate([
+            'descricao' => 'required',
+            'ensino' => 'required',
+        ]);
+
+        if ($this->salaService->update($dado, $id) == 'true')
+        {
+            return redirect()->route('gestores.index');
+        }
+        else
+        {
+            return view('gestores.editasala', [
+                'error' => 'Não foi possível atualizar os dados, consulte o administrador do sistema.'
+            ]);
+        }
+    }
+
+    public function novaSala()
+    {
+        return view('gestores.novasala');
+    }
+
+    public function excluiSala($id)
+    {
+        if ($this->salaService->destroy($id))
+            return view('gestores.salas');
+    }
+
+    public function editaUsuario()
+    {
+        return view('gestores.editausuario');
+    }
+
+    public function novoUsuario()
+    {
+        return view('gestores.novousuario');
+    }
+
+    public function excluiUsuario()
+    {
+        return view('gestores.editausuario');
+    }
+
 }
