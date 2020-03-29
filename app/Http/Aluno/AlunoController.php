@@ -22,8 +22,7 @@ class AlunoController extends Controller
 
     public function index()
     {
-        $dadosPessoais = $this->userService->show();
-        $notas = $this->notaService->show();
+
     }
 
     public function notas()

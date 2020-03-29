@@ -4,15 +4,16 @@
 
     <form action="{{ route('sala.update', $dado['id']) }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
-{{--        @if($error != null)--}}
-{{--        <div class="badge badge-danger col-sm-12">--}}
-{{--            <h2 style="color:black">{{$error}}</h2>--}}
-{{--        </div>--}}
-{{--        @endif--}}
+
+        @if($error ?? '')
+            <div class="badge badge-warning col-sm-12">
+                <h2 style="color:black">{{$error ?? ''}}</h2>
+            </div>
+        @endif
 
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Nova Tarefa</h3>
+                <h3 class="card-title">Editar Sala</h3>
             </div>
             <div class="card-body">
                 <div class="row">

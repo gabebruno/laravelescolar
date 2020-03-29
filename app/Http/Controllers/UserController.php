@@ -23,16 +23,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function dadosPessoais()
-    {
         $id = Auth::id();
 
         $dados = User::where('id', '=', $id)->first();
@@ -53,7 +43,8 @@ class UserController extends Controller
                     'anoAtual' => Carbon::now()->year,
                 ]);
                 break;
-
+            case 3:
+                return $dados;
         }
     }
 
@@ -71,14 +62,13 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return bool
      */
     public function store($dado)
     {
-
         User::create($dado);
 
-        return redirect()->route('users.index');
+        return true;
     }
 
     /**
@@ -87,9 +77,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show()
+    public function show($id)
     {
+        $dados = User::find($id);
 
+        return $dados;
     }
 
     /**
@@ -114,19 +106,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return string
      */
-    public function update($id, $obj)
+    public function update($id, $usuario)
     {
-        $dados = User::find($id);
+        $usuarios = User::find($id);
 
-        $obj = $this->request->validate([
-            'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
-        ]);
 
-        if ($dados->update($obj))
+        if ($usuarios->update($usuario))
         {
-            return redirect()->route('horario.index');
+            return 'true';
         }
         else{
             return 'false';

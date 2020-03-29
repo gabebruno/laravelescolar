@@ -21,7 +21,7 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $dados = Sala::all();
+        $dados = Sala::orderBy('descricao', 'asc')->paginate(10);
 
         return $dados;
     }
@@ -32,12 +32,8 @@ class SalaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return string
      */
-    public function store()
+    public function store($dado)
     {
-        $dado = $this->request->validate([
-            'descricao' => 'required',
-            'ensino' => 'required',
-        ]);
 
         Sala::create($dado);
 

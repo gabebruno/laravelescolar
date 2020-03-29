@@ -186,7 +186,28 @@ return [
         [
             'text'    => 'Gestor',
             'icon'    => 'fas fa-fw fa-user-cog',
-            'route'   => 'gestores.index'
+            'submenu' => [
+                [
+                    'text'  => 'Dados Pessoais',
+                    'icon'  => 'fas fa-fw fa-user',
+                    'route' => 'gestores.index'
+                ],
+                [
+                    'text'  => 'Professores',
+                    'icon'  => 'fas fa-fw fa-user-tie',
+                    'route' => 'gestores.professores'
+                ],
+                [
+                    'text'  => 'Alunos',
+                    'icon'  => 'fas fa-fw fa-user-graduate',
+                    'route' => 'gestores.alunos'
+                ],
+                [
+                    'text'  => 'Salas',
+                    'icon'  => 'fas fa-fw fa-school',
+                    'route' => 'gestores.salas'
+                ]
+            ]
         ],
     ],
 

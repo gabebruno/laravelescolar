@@ -50,14 +50,13 @@ class MateriaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return string
      */
     public function store()
     {
         $dado = $this->request->validate([
+            'descricao' => 'required',
             'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
         ]);
 
         Materia::create($dado);
@@ -95,15 +94,14 @@ class MateriaController extends Controller
      */
     public function update($id)
     {
-        $dado = Materia::find($id);
+        $dados = Materia::find($id);
 
         $dado = $this->request->validate([
+            'descricao' => 'required',
             'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
         ]);
 
-        if ($task->update($dado))
+        if ($dados->update($dado))
         {
             return redirect()->route('horario.index');
         }

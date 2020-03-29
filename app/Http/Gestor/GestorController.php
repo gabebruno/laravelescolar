@@ -22,16 +22,218 @@ class GestorController extends Controller
 
     public function index()
     {
-        $salas = $this->trataSalas($this->salaService->index());
+        $dados = $this->userService->index();
+
+        return view('gestores.index', [
+            'dados' => $dados
+        ]);
+    }
+
+
+
+
+    //Funções para CRUD de SALAS
+    public function indexSala()
+    {
+        $salas = $this->salaService->index();
         $professores = $this->trataProfessores($this->userService->listaProfessores());
         $alunos = $this->trataAlunos($this->userService->listaAlunos());
 
-        return view('gestores.index', [
-            'alunos' => $alunos,
-            'professores' => $professores,
+        return view('gestores.salas', [
             'salas' => $salas,
         ]);
     }
+
+    public function editSala($id)
+    {
+        $dado = $this->salaService->edit($id);
+        return view('gestores.editasala', ['dado' => $dado]);
+
+    }
+
+    public function updateSala($id)
+    {
+        $dado = $this->request->validate([
+            'descricao' => 'required',
+            'ensino' => 'required',
+        ]);
+
+        if ($this->salaService->update($dado, $id) == 'true')
+        {
+            return redirect()->route('gestores.salas');
+        }
+        else
+        {
+            $error = 'Não foi possível atualizar os dados, consulte o administrador do sistema.';
+            return redirect()->route('sala.edit')->with($error);
+        }
+    }
+
+    public function createSala()
+    {
+        return view('gestores.novasala');
+    }
+
+    public function storeSala()
+    {
+        $dado = $this->request->validate([
+            'descricao' => 'required',
+            'ensino' => 'required',
+        ]);
+
+        if($this->salaService->store($dado))
+            return redirect()->route('gestores.salas');
+    }
+
+
+    public function destroySala($id)
+    {
+        if ($this->salaService->destroy($id))
+            return view('gestores.salas');
+    }
+
+
+
+
+
+    //Funções para Professores
+    public function indexProfessores()
+    {
+        $salas = $this->salaService->index();
+        $professores = $this->trataProfessores($this->userService->listaProfessores());
+        $alunos = $this->trataAlunos($this->userService->listaAlunos());
+
+        return view('gestores.professores', [
+            'professores' => $professores,
+        ]);
+    }
+
+    public function editProfessor($id)
+    {
+        $dado = $this->userService->show($id);
+
+        return view('gestores.editaprofessor', ['dado' => $dado]);
+    }
+
+    public function updateProfessor($id)
+    {
+        $dado = $this->request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+        ]);
+
+        if($this->userService->update($id, $dado))
+            return redirect()->route('gestores.alunos');
+        else
+        {
+            $error = 'Não foi possível atualizar os dados, consulte o administrador do sistema.';
+            return redirect()->route('sala.edit')->with($error);
+        }
+
+    }
+
+    public function createProfessor()
+    {
+
+        return view('gestores.novoprofessor');
+    }
+
+    public function storeProfessor()
+    {
+        $dado = $this->request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+            'password' => 'nullable',
+            'tipo_id' => 'required'
+        ]);
+
+        $this->userService->store($dado);
+
+        return view('gestores.novoaluno');
+    }
+
+    public function destroyProfessor()
+    {
+        return view('gestores.editausuario');
+    }
+
+
+
+    //Funções para Alunos
+
+    public function indexAlunos()
+    {
+        $alunos = $this->trataAlunos($this->userService->listaAlunos());
+
+        return view('gestores.alunos', [
+            'alunos' => $alunos,
+        ]);
+    }
+
+    public function editAluno($id)
+    {
+        $dado = $this->userService->show($id);
+
+        return view('gestores.editaaluno', ['dado' => $dado]);
+    }
+
+    public function updateAluno($id)
+    {
+        $dado = $this->request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+        ]);
+
+        if($this->userService->update($id, $dado))
+            return redirect()->route('gestores.alunos');
+        else
+        {
+            $error = 'Não foi possível atualizar os dados, consulte o administrador do sistema.';
+            return redirect()->route('sala.edit')->with($error);
+        }
+
+    }
+
+    public function createAluno()
+    {
+
+        return view('gestores.novoaluno');
+    }
+
+    public function storeAluno()
+    {
+        $dado = $this->request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+            'password' => 'nullable',
+            'tipo_id' => 'required'
+        ]);
+
+        $this->userService->store($dado);
+
+        return view('gestores.novoaluno');
+    }
+
+    public function destroyAluno()
+    {
+        return view('gestores.editausuario');
+    }
+
+
+
+   //Tratamentos de dados
 
     public function trataProfessores($dados)
     {
@@ -44,7 +246,7 @@ class GestorController extends Controller
                 'cpf' => $this->userService->cpf($dado->cpf),
                 'telefone' => $this->userService->telefone($dado->telefone),
                 'endereco' => $dado->endereco,
-                'materias' => $dado->materia,
+                'materias' => $dado->materia ?? '',
             ];
         }
 
@@ -61,78 +263,77 @@ class GestorController extends Controller
                 'cpf' => $this->userService->cpf($dado->cpf),
                 'telefone' => $this->userService->telefone($dado->telefone),
                 'endereco' => $dado->endereco,
-                'salas' => $dado->salas->last()->descricao,
-                'ensino' => $dado->salas->last()->ensino,
+                'salas' => $dado->salas->last()->descricao ?? '',
+                'ensino' => $dado->salas->last()->ensino ?? '',
             ];
         }
 
         return $alunos;
     }
 
-    public function trataSalas($dados)
+    // Funções para Matéria
+
+    public function indexMateria()
     {
+        $alunos = $this->trataAlunos($this->userService->listaAlunos());
 
-        foreach ($dados as $key => $dado) {
-                $salas[$dado->id] = [
-                    'id' => $dado->id,
-                    'descricao' => $dado->descricao,
-                    'ensino' => $dado->ensino,
-                ];
-        }
-
-        return $salas;
+        return view('gestores.alunos', [
+            'alunos' => $alunos,
+        ]);
     }
 
-    public function editarSala($id)
+    public function editMateria($id)
     {
-        $dado = $this->salaService->edit($id);
-        return view('gestores.editasala', ['dado' => $dado]);
+        $dado = $this->userService->show($id);
 
+        return view('gestores.editaaluno', ['dado' => $dado]);
     }
 
-    public function updateSala($id)
+    public function updateMateria($id)
     {
         $dado = $this->request->validate([
-            'descricao' => 'required',
-            'ensino' => 'required',
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
         ]);
 
-        if ($this->salaService->update($dado, $id) == 'true')
-        {
-            return redirect()->route('gestores.index');
-        }
+        if($this->userService->update($id, $dado))
+            return redirect()->route('gestores.materias');
         else
         {
-            return view('gestores.editasala', [
-                'error' => 'Não foi possível atualizar os dados, consulte o administrador do sistema.'
-            ]);
+            $error = 'Não foi possível atualizar os dados, consulte o administrador do sistema.';
+            return redirect()->route('sala.edit')->with($error);
         }
+
     }
 
-    public function novaSala()
+    public function createMateria()
     {
-        return view('gestores.novasala');
+
+        return view('gestores.novamateria');
     }
 
-    public function excluiSala($id)
+    public function storeMateria()
     {
-        if ($this->salaService->destroy($id))
-            return view('gestores.salas');
+        $dado = $this->request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+            'password' => 'nullable',
+            'tipo_id' => 'required'
+        ]);
+
+        $this->userService->store($dado);
+
+        return view('gestores.novoaluno');
     }
 
-    public function editaUsuario()
+    public function destroyMateria()
     {
         return view('gestores.editausuario');
     }
-
-    public function novoUsuario()
-    {
-        return view('gestores.novousuario');
-    }
-
-    public function excluiUsuario()
-    {
-        return view('gestores.editausuario');
-    }
-
 }
