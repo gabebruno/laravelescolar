@@ -39,7 +39,7 @@ Route::middleware('auth')->namespace('Gestor')->group(function () {
     Route::delete('sala/{id}', 'GestorController@destroySala')->name('sala.destroy');
 
     //Rotas para Alunos
-    Route::get('aluno/alunos', 'GestorController@indexAlunos')->name('gestores.alunos');
+    Route::get('alunos', 'GestorController@indexAlunos')->name('gestores.alunos');
     Route::get('aluno/criar', 'GestorController@createAluno')->name('aluno.create');
     Route::get('aluno/{id}/editar', 'GestorController@editAluno')->name('aluno.edit');
     Route::post('aluno', 'GestorController@storeAluno')->name('aluno.store');
@@ -47,7 +47,7 @@ Route::middleware('auth')->namespace('Gestor')->group(function () {
     Route::delete('aluno/{id}', 'GestorController@destroyAluno')->name('aluno.destroy');
 
     //Rotas para Professores
-    Route::get('professor/professores', 'GestorController@indexProfessores')->name('gestores.professores');
+    Route::get('professores', 'GestorController@indexProfessores')->name('gestores.professores');
     Route::get('professor/criar', 'GestorController@createProfessor')->name('professor.create');
     Route::get('professor/{id}/editar', 'GestorController@editProfessor')->name('professor.edit');
     Route::post('professor', 'GestorController@storeProfessor')->name('professor.store');
@@ -55,7 +55,7 @@ Route::middleware('auth')->namespace('Gestor')->group(function () {
     Route::delete('professor/{id}', 'GestorController@destroyProfessor')->name('professor.destroy');
 
     //Rotas para Materias
-    Route::get('materia/materias', 'GestorController@indexMateria')->name('gestores.materias');
+    Route::get('materias', 'GestorController@indexMateria')->name('gestores.materias');
     Route::get('materia/criar', 'GestorController@createMateria')->name('materia.create');
     Route::get('materia/{id}/editar', 'GestorController@editMateria')->name('materia.edit');
     Route::post('materia', 'GestorController@storeMateria')->name('materia.store');

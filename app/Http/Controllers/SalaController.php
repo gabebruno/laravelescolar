@@ -22,10 +22,19 @@ class SalaController extends Controller
     public function index()
     {
         $dados = Sala::orderBy('descricao', 'asc')->paginate(10);
-
         return $dados;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function all()
+    {
+        $dados = Sala::orderBy('descricao', 'asc')->get();
+        return $dados;
+    }
     /**
      * Store a newly created resource in storage.
      *

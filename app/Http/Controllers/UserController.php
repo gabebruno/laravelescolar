@@ -62,13 +62,11 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return bool
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store($dado)
     {
-        User::create($dado);
-
-        return true;
+        return User::create($dado);
     }
 
     /**

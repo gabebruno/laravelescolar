@@ -10,7 +10,6 @@
                 <h2 style="color:black">{{$error ?? ''}}</h2>
             </div>
         @endif
-
         <input type="hidden" id="tipo_id" name="tipo_id" value=1>
         <input type="hidden" id="password" name="password" value={{bcrypt(123456)}}>
 
@@ -32,17 +31,26 @@
                 <div class="row">
                     <div class="input-group col-sm-3 mb-3">
                         <label class="input-group">CPF</label>
-                        <input type="text" name="cpf" class="form-control" placeholder="00022244477" value="{{ old('cpf') }}" required>
+                        <input type="cpf" name="cpf" class="form-control" placeholder="00022244477" value="{{ old('cpf') }}" required>
                     </div>
                     <div class="input-group col-sm-3 mb-3">
                         <label class="input-group">Telefone</label>
-                        <input type="text" name="telefone" class="form-control" placeholder="67999991111" value="{{ old('telefone') }}" required>
+                        <input type="tel" name="telefone" class="form-control" placeholder="" value="{{ old('telefone') }}" required>
                     </div>
                     <div class="input-group col-sm-6 mb-3">
                         <label class="input-group">Endereço</label>
                         <input type="text" name="endereco" class="form-control" placeholder="Endereço completo" value="{{ old('endereco') }}" required>
                     </div>
-
+                </div>
+                <div class="row">
+                    <div class="input-group col-sm-3 mb-3">
+                        <label class="input-group">Sala</label>
+                        <select name="salaId" class="form-control">
+                            @foreach($salas as $sala)
+                                <option value={{$sala->id}}> {{$sala->descricao}} </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary offset-11">Salvar</button>
                 <p class="badge badge-warning">A senha incial para qualquer cadastro é 123456</p>

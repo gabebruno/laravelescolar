@@ -206,6 +206,11 @@ return [
                     'text'  => 'Salas',
                     'icon'  => 'fas fa-fw fa-school',
                     'route' => 'gestores.salas'
+                ],
+                [
+                    'text'  => 'Materias',
+                    'icon'  => 'fas fa-fw fa-book',
+                    'route' => 'gestores.materias'
                 ]
             ]
         ],

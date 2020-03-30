@@ -19,19 +19,14 @@ class SalaUserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return string
      */
-    public function store()
+    public function store($dado)
     {
-        $dado = $this->request->validate([
-            'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
-        ]);
 
         SalaUser::create($dado);
 
-        return redirect()->route('alunoseries.index');
+        return 'true';
     }
 
     /**

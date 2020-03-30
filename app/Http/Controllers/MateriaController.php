@@ -17,33 +17,13 @@ class MateriaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function index()
     {
-        $dados = Materia::with('sala', 'user', 'horario')->get();
+        $dados = Materia::with('sala', 'user')->paginate(10);
 
-        foreach ($dados as $dado) {
-            $materias[$dado->id] = [
-                'descricao' => $dado->descricao,
-                'professor' => $dado->user->nome,
-                'salas' => $dado->sala,
-                'horarios' => $dado->horario,
-
-            ];
-        }
-
-        return $materias;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-
+        return $dados;
     }
 
     /**
@@ -72,7 +52,9 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
+        $dados = Materia::find($id);
 
+        return $dados;
     }
 
     /**
@@ -83,6 +65,9 @@ class MateriaController extends Controller
      */
     public function edit($id)
     {
+        $dados = Materia::find($id);
+
+        return $dados;
     }
 
     /**
@@ -92,21 +77,21 @@ class MateriaController extends Controller
      * @param  int  $id
      * @return string
      */
-    public function update($id)
+    public function update($dado, $id)
     {
         $dados = Materia::find($id);
 
-        $dado = $this->request->validate([
-            'descricao' => 'required',
-            'user_id' => 'required',
-        ]);
-
         if ($dados->update($dado))
         {
-            return redirect()->route('horario.index');
+            return 'true';
         }
         else{
             return 'false';
         }
+    }
+
+    public function destroy()
+    {
+
     }
 }
