@@ -34,7 +34,7 @@
                         @endforeach
                     </td>
                     <td class="col-sm-2">
-                        <a href="#" onclick="if(confirm('Deseja excluir?')) {deleteUsuario({{$dado['id']}})}" class="btn btn-sm btn-danger">Excluir</a>
+                        <a href="#" onclick="if(confirm('Deseja excluir?')) { deleteProfessor( {{ $dado['id'] }} ) }" class="btn btn-sm btn-danger">Excluir</a>
                         <a href="{{ route('professor.edit', $dado['id']) }}" class="btn btn-sm btn-warning">Alterar</a>
                     </td>
                 </tr>

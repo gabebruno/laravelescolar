@@ -21,7 +21,7 @@
                     <td>{{$dado['descricao']}}</td>
                     <td>{{$dado['ensino']}}</td>
                     <td class="col-sm-2">
-                        <a href="#" onclick="if(confirm('Deseja excluir?')) {deleteSala({{$dado['id']}})}" class="btn btn-sm btn-danger">Excluir</a>
+                        <a href="#" onclick="if(confirm('Deseja excluir?')) { deleteSala( {{ $dado['id'] }} ) }" class="btn btn-sm btn-danger">Excluir</a>
                         <a href="{{ route('sala.edit', $dado['id']) }}" class="btn btn-sm btn-warning">Alterar</a>
                     </td>
                 </tr>

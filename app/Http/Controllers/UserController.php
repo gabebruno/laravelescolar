@@ -44,7 +44,9 @@ class UserController extends Controller
                 ]);
                 break;
             case 3:
-                return $dados;
+                return view('gestores.index', [
+                    'dados' => $dados
+                ]);
         }
     }
 
@@ -113,6 +115,17 @@ class UserController extends Controller
         {
             return 'true';
         }
+        else{
+            return 'false';
+        }
+    }
+
+    public function destroy($id)
+    {
+        $usuario = User::find($id);
+
+        if($usuario->delete())
+            return 'true';
         else{
             return 'false';
         }

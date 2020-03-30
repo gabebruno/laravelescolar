@@ -84,7 +84,7 @@ class SalaController extends Controller
 
     public function destroy($id)
     {
-        $dados = Sala::find($id);
+        $dado = Sala::find($id);
 
         if($dado->delete())
             return 'true';

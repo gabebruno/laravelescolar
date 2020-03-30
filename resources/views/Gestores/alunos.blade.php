@@ -31,7 +31,6 @@
                         @endforeach
                     </td>
                     <td class="col-sm-2">
-                        <a href="#" onclick="if(confirm('Deseja excluir?')) {deleteUsuario({{$dado['id']}})}" class="btn btn-sm btn-danger">Excluir</a>
                         <a href="{{ route('aluno.edit', $dado['id']) }}" class="btn btn-sm btn-warning">Alterar</a>
                     </td>
                 </tr>

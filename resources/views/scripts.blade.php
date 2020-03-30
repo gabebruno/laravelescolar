@@ -2,13 +2,12 @@
 
     function deleteSala(dataId) {
         $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             dataType: 'json',
             data: {
-                _method: 'DELETE',
                 _token: '{!! csrf_token() !!}',
             },
-            url: '{{ url('gestor') }}'+ '/sala/' + dataId,
+            url: '/sala/' + dataId,
             success: function(data)
             {
                 if(data.success)
@@ -17,17 +16,16 @@
                 }
             }
         })
-    };
+    }
 
-    function deleteUsuario(dataId) {
+    function deleteProfessor(dataId) {
         $.ajax({
-            type: 'POST',
+            type: 'DELETE',
             dataType: 'json',
             data: {
-                _method: 'DELETE',
                 _token: '{!! csrf_token() !!}',
             },
-            url: '{{ url('/') }}'+ '/usuario/' + dataId,
+            url: '/professor/' + dataId,
             success: function(data)
             {
                 if(data.success)
@@ -36,6 +34,7 @@
                 }
             }
         })
-    };
+    }
+
 
 </script>

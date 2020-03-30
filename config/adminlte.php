@@ -174,45 +174,9 @@ return [
 
     'menu' => [
         [
-            'text'    => 'Aluno',
-            'icon'    => 'fas fa-fw fa-user-graduate',
-            'route'   => 'alunos.dados'
-        ],
-        [
-            'text'    => 'Professor',
-            'icon'    => 'fas fa-fw fa-user-tie',
-            'route'   => 'professores.dados'
-        ],
-        [
-            'text'    => 'Gestor',
-            'icon'    => 'fas fa-fw fa-user-cog',
-            'submenu' => [
-                [
-                    'text'  => 'Dados Pessoais',
-                    'icon'  => 'fas fa-fw fa-user',
-                    'route' => 'gestores.index'
-                ],
-                [
-                    'text'  => 'Professores',
-                    'icon'  => 'fas fa-fw fa-user-tie',
-                    'route' => 'gestores.professores'
-                ],
-                [
-                    'text'  => 'Alunos',
-                    'icon'  => 'fas fa-fw fa-user-graduate',
-                    'route' => 'gestores.alunos'
-                ],
-                [
-                    'text'  => 'Salas',
-                    'icon'  => 'fas fa-fw fa-school',
-                    'route' => 'gestores.salas'
-                ],
-                [
-                    'text'  => 'Materias',
-                    'icon'  => 'fas fa-fw fa-book',
-                    'route' => 'gestores.materias'
-                ]
-            ]
+            'text'    => 'Perfil',
+            'icon'    => 'fas fa-fw fa-user',
+            'route'   => 'user.index'
         ],
     ],
 

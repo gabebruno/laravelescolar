@@ -96,10 +96,8 @@ class GestorController extends Controller
     public function destroySala($id)
     {
         if ($this->salaService->destroy($id))
-            return view('gestores.salas');
+            return 'true';
     }
-
-
 
 
 
