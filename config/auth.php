@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'aluno',
         'passwords' => 'users',
     ],
 
@@ -36,9 +36,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'aluno' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'alunos',
+        ],
+        'professor' => [
+            'driver' => 'session',
+            'provider' => 'professores',
+        ],
+        'gestor' => [
+            'driver' => 'session',
+            'provider' => 'gestores',
         ],
 
         'api' => [
@@ -66,9 +74,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'alunos' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Http\Aluno::class,
+        ],
+        'professores' => [
+            'driver' => 'eloquent',
+            'model' => App\Http\Professor::class,
+        ],
+        'gestores' => [
+            'driver' => 'eloquent',
+            'model' => App\Http\Gestor::class,
         ],
 
         // 'users' => [
@@ -93,8 +109,20 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'alunos' => [
+            'provider' => 'alunos',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'professores' => [
+            'provider' => 'professores',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'gestores' => [
+            'provider' => 'gestores',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Gestor;
+namespace App\Http\Gestor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MateriaController;
