@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Gestor;
+namespace App\Http\Controllers\Gestor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MateriaController;
@@ -28,6 +28,8 @@ class GestorController extends Controller
         $this->salaUserService = (new SalaUserController($request));
         $this->materiaService = (new MateriaController($request));
     }
+
+
 
     public function index()
     {
