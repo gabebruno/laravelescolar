@@ -18,9 +18,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="input-group col-sm-6 mb-3">
+                        <label class="input-group">Descrição</label>
                         <input type="text" name="descricao" class="form-control" placeholder="Descrição" value="{{ old('descricao') }}" required>
                     </div>
-                    <div class="input-group col-sm-4 mb-3 offset-2">
+                    <div class="input-group col-sm-6 mb-3">
+                        <label class="input-group">Ensino</label>
                         <input type="text" name="ensino" class="form-control" placeholder="Ensino" value="{{ old('ensino') }}" required>
                     </div>
                 </div>

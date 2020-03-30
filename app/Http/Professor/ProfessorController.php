@@ -2,7 +2,7 @@
 
 namespace App\Http\Professor;
 
-use App\Http\Controllers\Controller as Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\SalaUserController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\SalaController;
@@ -26,11 +26,12 @@ class ProfessorController extends Controller
         $this->alunoSerieService = (new SalaUserController);
     }
 
-    public function dadosAluno()
+    public function index()
     {
-        $dadosPessoais = $this->userService->show($dadosPessoaisId);
-        $alunoSerie = $this->alunoSerieService->show($alunoSerieId);
-        $notas = $this->notaService->show($notaId);
-        $sala = $this->salaService->show($salaId);
+        $dados = $this->userService->index();
+
+        return view('professores.index', [
+            'dados' => $dados
+        ]);
     }
 }

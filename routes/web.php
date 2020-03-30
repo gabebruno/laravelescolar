@@ -24,6 +24,15 @@ Route::middleware('auth')->group(function () {
 
 });
 
+//Route::middleware('auth')->namespace('Aluno')->group(function () {
+//    Route::get('aluno', 'AlunoController@index')->name('alunos.dados');
+//    Route::get('aluno/{id}/notas', 'AlunoController@show')->name('alunos.notas');
+//});
+//
+//Route::middleware('auth')->namespace('Professor')->group(function () {
+//    Route::get('professor', 'ProfessorController@index')->name('professores.dados');
+//    Route::get('professor/{id}/horario', 'ProfessorController@show')->name('professores.horario');
+//});
 
 //Rotas do namespace GESTOR para controle de acesso de usuário.
 Route::middleware('auth')->namespace('Gestor')->group(function () {
@@ -62,14 +71,14 @@ Route::middleware('auth')->namespace('Gestor')->group(function () {
     Route::post('materia/{id}', 'GestorController@updateMateria')->name('materia.update');
     Route::delete('materia/{id}', 'GestorController@destroyMateria')->name('materia.destroy');
 
-    //Rotas de acesso não autorizado
-    Route::get('aluno', function() {
-        return view('auth.naoautorizado');
-    })->name('alunos.dados');
-
-    Route::get('professor', function() {
-        return view('auth.naoautorizado');
-    })->name('professores.dados');
+//    //Rotas de acesso não autorizado
+//    Route::get('aluno', function() {
+//        return view('auth.naoautorizado');
+//    })->name('alunos.dados');
+//
+//    Route::get('professor', function() {
+//        return view('auth.naoautorizado');
+//    })->name('professores.dados');
 
 });
 

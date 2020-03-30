@@ -18,10 +18,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="input-group col-sm-6 mb-3">
+                        <label class="input-group">Descrição</label>
                         <input type="text" name="descricao" class="form-control" placeholder="Descrição" value="{{ old('descricao') }}" required>
                     </div>
-                    <div class="input-group col-sm-4 mb-3 offset-2">
-                        <input type="text" name="user_id" class="form-control" placeholder="Professor" value="{{ old('user_id') }}" required>
+                    <div class="input-group col-sm-6 mb-3">
+                        <label class="input-group">Professor</label>
+                        <select name="userId" class="form-control">
+                            @foreach($professores as $professor)
+                                <option value={{$professor->id}}> {{$professor->nome}} </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary offset-11">Salvar</button>

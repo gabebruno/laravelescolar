@@ -22,11 +22,16 @@ class AlunoController extends Controller
 
     public function index()
     {
+        $dados = $this->userService->index();
+
+        return view('alunos.index', [
+            'dados' => $dados
+        ]);
 
     }
 
-    public function notas()
+    public function show()
     {
-
+        $this->notaService->show($id);
     }
 }

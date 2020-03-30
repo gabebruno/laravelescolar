@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Gestor;
 
-use App\Http\Controllers\Controller as Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\SalaUserController;
@@ -37,8 +37,6 @@ class GestorController extends Controller
             'dados' => $dados
         ]);
     }
-
-
 
 
     //Funções para CRUD de SALAS
@@ -205,17 +203,18 @@ class GestorController extends Controller
             'endereco' => 'required',
         ]);
 
-        $user = $this->userService->update($dado);
+        $this->userService->update($id, $dado);
 
-        $salaUser = $this->salaUserService->find($userId);
+        $salaUser = $this->salaUserService->encontraPorAluno($id);
 
         $salaUser = [
-            'user_id' => $user->id,
+            'id' => $salaUser->id,
+            'user_id' => $id,
             'sala_id' => $this->request->input('salaId'),
             'exercicio' => Carbon::now()->year,
         ];
 
-        $this->salaUserService->store($salaUser);
+        $this->salaUserService->update($salaUser['id'], $salaUser);
 
         return redirect()->route('gestores.alunos');
     }
@@ -273,38 +272,37 @@ class GestorController extends Controller
     public function editMateria($id)
     {
         $dado = $this->materiaService->show($id);
+        $professores = $this->userService->listaProfessores();
 
-        return view('gestores.editamateria', ['dado' => $dado]);
+        return view('gestores.editamateria', [
+            'dado' => $dado,
+            'professores' => $professores
+            ]);
     }
 
     public function updateMateria($id)
     {
-        $dado = $this->request->validate([
-            'descricao' => 'required',
-            'user_id' => 'required',
-        ]);
+        $dado = $this->request->all();
+        $dado['user_id'] = $this->request->input('userId');
 
-        if($this->materiaService->update($dado, $id))
-            return redirect()->route('gestores.materias');
-        else
-        {
-            $error = 'Não foi possível atualizar os dados, consulte o administrador do sistema.';
-            return redirect()->route('materia.edit')->with($error);
-        }
+        $this->materiaService->update($dado, $id);
 
+        return redirect()->route('gestores.materias');
     }
 
     public function createMateria()
     {
-        return view('gestores.novamateria');
+        $professores = $this->userService->listaProfessores();
+
+        return view('gestores.novamateria', [
+            'professores' => $professores
+        ]);
     }
 
     public function storeMateria()
     {
-        $dado = $this->request->validate([
-            'descricao' => 'required',
-            'user_id' => 'required',
-        ]);
+        $dado = $this->request->all();
+        $dado['user_id'] = $this->request->input('userId');
 
         $this->materiaService->store($dado);
 
@@ -338,23 +336,4 @@ class GestorController extends Controller
 
         return $professores;
     }
-
-    public function trataAlunos($dados)
-    {
-        foreach ($dados as $dado) {
-            $alunos[$dado->id] = [
-                'id' => $dado->id,
-                'nome' => $dado->nome,
-                'email' => $dado->email,
-                'cpf' => $this->userService->cpf($dado->cpf),
-                'telefone' => $this->userService->telefone($dado->telefone),
-                'endereco' => $dado->endereco,
-                'salas' => $dado->salas->last()->descricao ?? '',
-                'ensino' => $dado->salas->last()->ensino ?? '',
-            ];
-        }
-
-        return $alunos;
-    }
-
 }

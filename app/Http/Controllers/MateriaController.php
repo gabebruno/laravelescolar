@@ -32,13 +32,8 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return string
      */
-    public function store()
+    public function store($dado)
     {
-        $dado = $this->request->validate([
-            'descricao' => 'required',
-            'user_id' => 'required',
-        ]);
-
         Materia::create($dado);
 
         return 'true';

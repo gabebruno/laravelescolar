@@ -36,25 +36,14 @@ class SalaUserController extends Controller
      * @param  int  $id
      * @return string
      */
-    public function update($id)
+    public function update($id, $dados)
     {
         $dado = SalaUser::find($id);
 
-        $dado = $this->request->validate([
-            'user_id' => 'required',
-            'sala_id' => 'required',
-            'exercicio' => 'required',
-        ]);
+        $dado->update($dados);
+        return 'true';
 
-        if ($task->update($dado))
-        {
-            return redirect()->route('alunoseries.index');
-        }
-        else{
-            return 'false';
-        }
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -72,5 +61,12 @@ class SalaUserController extends Controller
         else{
             return 'false';
         }
+    }
+
+    public function encontraPorAluno($userId)
+    {
+        $dados = SalaUser::where('user_id', '=', $userId)->first();
+
+        return $dados;
     }
 }
